@@ -1,0 +1,22 @@
+{
+  "name": "projet_mean_bootcamp",
+  "version": "1.0.0",
+  "description": "Projet intermédiaire du bootcamp sur le MEAN Stack organisé par le PSEJ-2021",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mean"
+  ],
+  "author": "Mouhamet Latyr NDIAYE - Magamou GUEYE",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2",
+    "mongoose": "^6.1.2",
+    "nodemon": "^2.0.15"
+  }
+}
