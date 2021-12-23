@@ -4,7 +4,7 @@
   "description": "Projet intermédiaire du bootcamp sur le MEAN Stack organisé par le PSEJ-2021",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

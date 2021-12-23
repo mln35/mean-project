@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
-const userRouter = require('./routes/user.route');
+const registerRouter = require('./src/routes/register.route');
 const handlebars = require('express-handlebars');
 const path = require('path');
 const port = process.env.PORT || 8080;
@@ -18,21 +18,26 @@ try {
 }
 
 const app=express();
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
 app.use(express.static('public'));
 
 // ejs 
 app.engine('hbs',handlebars.engine({
     extname:'hbs',
-    defaultLayout:'home'
+    layoutsDir:`${__dirname}/src/views/layouts`,
+    defaultLayout:'index'
 }));
 app.set('view engine','hbs');
-app.set('views',path.join(__dirname, './views'));
+app.set('views',path.join(__dirname, 'src/views'));
 
-app.use('/',userRouter);
+// app.use('/',(req, res) => {
+//     res.render('pages/register')
+// })
+app.use('/',registerRouter);
 
-app.get((req,res)=>{
+app.get('/',(req,res)=>{
    res.json({message:'404 Not found'});
 });
 
