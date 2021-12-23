@@ -8,8 +8,24 @@ route.get('/user/register',async (req,res)=>{
 })
 
 route.post('/user/register',async (req,res)=>{
-    res.json({msg:`It's ok`})
-})
+    
+        registerService.saveUser(req.body).then((r)=>{
+            if(r && r.message) 
+                    console.log('res',r);
+            res.render('pages/login');
+        }).catch((e)=>{
+            console.log(e);
+            res.render('pages/register',{msg:e.message});
+            // console.log(e);
+        });
+        // if(result.error){
+        //     console.log('there was error');
+        //     res.json(result.error);
+        // }else{
+        //     console.log('pb');
+        //     res.render('pages/login');
+        // }
+    });
 
 
 // route.get('/',async (req,res)=>{
