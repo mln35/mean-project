@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const mainRouter = require('./src/routes/main.route');
 const registerRouter = require('./src/routes/register.route');
+const loginRouter=require('./src/routes/login.route');
 const handlebars = require('express-handlebars');
 const path = require('path');
 const port = process.env.PORT || 8080;
@@ -39,7 +40,7 @@ app.set('views',path.join(__dirname, 'src/views'));
 // })
 app.use('/',registerRouter);
 app.use('/',mainRouter);
-
+app.use('/', loginRouter);
 app.get('/',(req,res)=>{
    res.json({message:'404 Not found'});
 });
