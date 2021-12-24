@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
+const mainRouter = require('./src/routes/main.route');
 const registerRouter = require('./src/routes/register.route');
 const handlebars = require('express-handlebars');
 const path = require('path');
@@ -8,7 +9,7 @@ const port = process.env.PORT || 8080;
 const host = process.env.HOST || '127.0.0.1';
 const mongoUrl=process.env.MONGO_URL;
 
-mongoose.Promise = global.Promise;
+
 try {
     mongoose.connect(mongoUrl,()=>{
         console.log('Successfully connected to mongodb instance');
@@ -37,6 +38,7 @@ app.set('views',path.join(__dirname, 'src/views'));
 //     res.render('pages/register')
 // })
 app.use('/',registerRouter);
+app.use('/',mainRouter);
 
 app.get('/',(req,res)=>{
    res.json({message:'404 Not found'});

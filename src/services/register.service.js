@@ -1,11 +1,9 @@
 const User=require('../model/user.model');
 
 const saveUser = async(user)=>{
-    try{
-        await User.create(user);
-    }catch(e){
-        throw(e)
-    }
+    
+    const u = await User.create(user);
+
 }
 save= async(user)=>{
 const u = new User({
