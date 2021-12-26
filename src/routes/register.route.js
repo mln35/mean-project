@@ -1,5 +1,6 @@
 const express = require('express');
 const route = express.Router();
+// const bcrypt=require('bcrypt');
 const registerService = require('../services/register.service');
 
 
@@ -8,7 +9,7 @@ route.get('/user/register',async (req,res)=>{
 })
 
 route.post('/user/register',async (req,res)=>{
-    
+    // req.body.password= await bcrypt.hash(password, 10);
         registerService.saveUser(req.body).then((r)=>{
             if(r && r.message) 
                     console.log('res',r);
