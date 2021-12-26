@@ -12,6 +12,7 @@ const User=require('../model/user.model');
 route.get('/user/login', async(req, res)=>{
     const tokenCookie=req.headers.cookie;
     if(tokenCookie !=undefined){
+        console.log(`user/login: ${tokenCookie}`);
         console.log('/user/login--get');
         const token=tokenCookie.split('=')[1];
         const decoded=jwt.verify(token, 'secretsecret');
