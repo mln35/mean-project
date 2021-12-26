@@ -1,5 +1,6 @@
 const express = require('express');
 const route = express.Router();
+// const bcrypt=require('bcrypt');
 const registerService = require('../services/register.service');
 
 route.get('/user/register',async (req,res)=>{

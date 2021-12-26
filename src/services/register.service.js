@@ -5,12 +5,14 @@ const Verification=require('../model/verification.model');
 
 const mailService = require('../services/email.service');
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 const saveUser = async(user) => {
+    user.password = bcrypt.hashSync(user.password, 8);
+
     const _user = await User.create(user);
     let verificationToken = jwt.sign(
-        {ID: _useru._id},
+        {ID: _user._id},
         process.env.TOKEN_KEY,
         {expiresIn: "7d"}
     );
@@ -24,13 +26,13 @@ const saveUser = async(user) => {
     // console.log(l);
     mailService.sendMail(_user.email, verificationToken);
 }
-save = async(user) => {
-    const u = new User({
-    firstname: req.body.username,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
-  });
-}
+// save = async(user) => {
+//     const u = new User({
+//     firstname: req.body.username,
+//     email: req.body.email,
+//     password: bcrypt.hashSync(req.body.password, 8)
+//   });
+// }
 
 const getAllUsers = async ()=>{
     let users = await User.find();

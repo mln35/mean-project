@@ -39,8 +39,9 @@ app.set('views',path.join(__dirname, 'src/views'));
 //     res.render('pages/register')
 // })
 app.use('/',registerRouter);
-app.use('/',mainRouter);
 app.use('/', loginRouter);
+app.use('/',mainRouter);
+
 app.get('/',(req,res)=>{
    res.json({message:'404 Not found'});
 });
