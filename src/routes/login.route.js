@@ -8,17 +8,17 @@ const User=require('../model/user.model');
 // route.get('/user/login',async (req,res)=>{
 //     res.render('pages/login', {error:loginService.log.__NO_ERROR});
 // });
+let key = process.env.TOKEN_KEY;
 
 route.get('/user/login', async(req, res)=>{
     const tokenCookie=req.headers.cookie;
-    if(tokenCookie !=undefined){
-        console.log(`user/login: ${tokenCookie}`);
+    if(tokenCookie){
         console.log('/user/login--get');
-        const token=tokenCookie.split('=')[1];
-        const decoded=jwt.verify(token, 'secretsecret');
+        const token=tokenCookie.split(';').filter(t => t.includes('token'))[0].split("=")[1];
+        // console.log(token);
+        const decoded = jwt.verify(token, key);
         const user=await User.findById(decoded.id);
         res.render('pages/dashboard');
-        // res.json({message:'dashboard'});
     }
     else{
         res.render('pages/login'); 
@@ -33,11 +33,11 @@ route.post('/user/login', async(req, res)=>{
         if(user){
            const authResult=await bcrypt.compare(req.body.password, user.password);
            if(authResult){
-               const token=jwt.sign({id:user._id}, 'secretsecret',{
+               const token=jwt.sign({id:user._id}, key,{
                    expiresIn:'24h'
                });
             //    console.log(`in loginForm token:${token}`);
-               res.cookie('token', token);
+            //    res.cookie('token', token);
                res.render('pages/dashboard', {
                name:user.firstname,
                email:user.email

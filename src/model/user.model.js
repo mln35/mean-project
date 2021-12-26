@@ -29,6 +29,11 @@ const UserSchema = new mongoose.Schema({
     },
     image:{
         type:String
+    },
+    verified: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 module.exports= mongoose.model('User',UserSchema)
