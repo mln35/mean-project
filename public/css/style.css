@@ -3,3 +3,22 @@
     border-radius: 3px;
     color:white;
 }
+.content{
+    min-height: 60vh;
+}
+.user{
+    background-color:white;
+    text-align: center;
+    width: 58px;
+    border-radius: 50%;
+    border: solid white;
+    font-size: 37px;
+}
+ul li{
+    align-self: center;
+}
+.dropdown-item{
+    display: none;
+
+}
+.show {display:block !important;}

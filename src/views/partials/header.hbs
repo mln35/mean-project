@@ -1,11 +1,11 @@
  <header class="bs4header bg-primary mb-5">
-        <div class="container">
+        <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark">
-                <a class="navbar-brand" href="#"><b><i>Brand Name</i></b></a>
+                <a class="navbar-brand" href="#"><b><i>GN-MARKET</i></b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs4navbar" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="bs4navbar">
+                <div class="collapse navbar-collapse justify-content-end" id="bs4navbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a class="nav-link active" href="/">Home</a>
@@ -25,8 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact Us</a>
                         </li>
-                        <li class="dropdown">
-                            <button class="btn btn-warning dropdown-toggle ml-lg-5" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</button>
+                        <li class="user dropdown  align-self-center" onclick="dropdown()">
+                            <i class="fa fa-user user-icon ml-lg-5" href="#" id="navbarDropdownMenuLink" 
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">User Name</a>
                                 <a class="dropdown-item" href="#">Setting</a>
