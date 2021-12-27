@@ -30,7 +30,6 @@ route.get('/user/login', async(req, res)=>{
     else{
         res.render('pages/login'); 
     }
-    
 });
 
 route.post('/user/login', async(req, res)=>{

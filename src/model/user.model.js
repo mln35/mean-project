@@ -34,6 +34,7 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
-    }
+    },
+    date: Date
 })
 module.exports= mongoose.model('User',UserSchema)
