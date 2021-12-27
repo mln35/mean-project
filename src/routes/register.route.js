@@ -6,6 +6,7 @@ const registerService = require('../services/register.service');
 route.get('/user/register',async (req,res)=>{
     res.render('pages/register')
 });
+
 route.get('/user/verify/:id',async (req,res)=> {
 
     await registerService.verify(req.params.id)
@@ -13,6 +14,7 @@ route.get('/user/verify/:id',async (req,res)=> {
     // let id = req.params.id;
     // Verification.find({verificationToken})
 });
+
 route.post('/user/register',async (req,res)=>{
         let user = req.body;
         // user.verificationToken = '';
