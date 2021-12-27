@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 
 const saveUser = async(user) => {
     user.password = bcrypt.hashSync(user.password, 8);
-
+    user.date = new Date();
     const _user = await User.create(user);
     let verificationToken = jwt.sign(
         {ID: _user._id},
@@ -18,12 +18,6 @@ const saveUser = async(user) => {
     );
     const _verif = await Verification.create({email:user.email, verificationToken:verificationToken});
 
-    // console.log(u._id);
-    // console.log(u);
-    // console.log(verificationToken)
-    // User.findByIdAndUpdate(u._id, {$set:{verificationToken:verificationToken}})
-    const l = await User.findById(_user._id)
-    // console.log(l);
     mailService.sendMail(_user.email, verificationToken);
 }
 // save = async(user) => {

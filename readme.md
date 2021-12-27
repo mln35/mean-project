@@ -37,3 +37,11 @@
 ## Notes
 
 - These are infos related to the user management. We will add later other use cases
+
+
+
+
+TODO
+- login button
+- profil photo
+    - logout
