@@ -3,7 +3,6 @@ const route = express.Router();
 const loginService=require('../services/login.service');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
-const registerService=require('../services/register.service');
 const User=require('../model/user.model');
 
 let key = process.env.TOKEN_KEY;
@@ -13,10 +12,13 @@ route.get('/user/login', async(req, res)=>{
     if(tokenCookie){
         console.log('/user/login--get');
         const token=tokenCookie.split(';').filter(t => t.includes('token'))[0].split("=")[1];
-        // console.log(token);
+        console.log(token);
         const decoded = jwt.verify(token, key);
         const user=await User.findById(decoded.id);
-        res.render('pages/dashboard');
+        res.render('pages/dashboard', {
+            name:user.firstname,
+            email:user.email
+            });
     }
     else{
         res.render('pages/login'); 
@@ -39,6 +41,7 @@ route.post('/user/login', async(req, res)=>{
                name:user.firstname,
                email:user.email
                });
+               loginService.log.login=1;
            }else{
                res.json({message:'Auth Failed'});
            }
@@ -59,4 +62,7 @@ route.post('/user/logout', (req, res)=>{
     console.log('logout');
     res.redirect('/');
 });
+route.get('/user/profile', (req, res)=>{
+    res.render('pages/profile', {firstname:'Magamou', lastname:'Gueye'});
+})
 module.exports=route;
