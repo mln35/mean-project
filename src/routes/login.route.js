@@ -15,8 +15,8 @@ route.get('/user/login', async(req, res)=>{
         console.log(token);
         const decoded = jwt.verify(token, key);
         const user=await User.findById(decoded.id);
-       
-        res.render('pages/dashboard', {
+        
+        res.render('main', {
             name:user.firstname,
             email:user.email
             });
@@ -57,12 +57,10 @@ route.post('/user/login', async(req, res)=>{
        }    
 });
 
-
-
-route.post('/user/logout', (req, res)=>{
+route.get('/user/logout', (req, res)=>{
     res.clearCookie('token');
     console.log('logout');
-    res.redirect('/');
+    res.redirect('/',{logged:false});
 });
 
 module.exports=route;

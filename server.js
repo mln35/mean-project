@@ -20,6 +20,7 @@ try {
 }
 
 const app=express();
+app.locals.logged=false;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -42,6 +43,10 @@ app.engine('hbs',handlebars.engine({
 app.set('view engine','hbs');
 app.set('views',path.join(__dirname, 'src/views'));
 
+// app.use('/',(req, res) => {
+//     res.render('pages/register')
+// })
+require('./src/middlewares/isConnected')(app)
 app.use('/',registerRouter);
 app.use('/', loginRouter);
 app.use('/',mainRouter);

@@ -1,46 +1,51 @@
- <header class="bs4header container-fluid bg-primary mb-5">
-        {{!-- <div class="container">
+ <header class="bs4header bg-primary mb-5">
+        <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark">
-                <a class="navbar-brand" href="#"><b><i>Brand Name</i></b></a>
+                <a class="navbar-brand" href="#"><b><i>GN-MARKET</i></b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs4navbar" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="bs4navbar">
+                <div class="collapse navbar-collapse justify-content-end" id="bs4navbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a class="nav-link active" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About Us</a>
+                            <a class="nav-link" href="#">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link" href="#">Messages</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="#">Reports</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact Us</a>
-                        </li>
-                        <li class="dropdown">
-                            <button class="btn btn-warning dropdown-toggle ml-lg-5" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</button>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">User Name</a>
-                                <a class="dropdown-item" href="#">Setting</a>
-                                <a class="dropdown-item" href="#">Logout</a>
-                            </div>
-                        </li>
+                        {{logged}}
+                        {{#if logged}}
+
+                               
+                            <li class="user dropdown  align-self-center" >
+                                <i class="fa fa-user user-icon ml-lg-5" onclick="dropdown()" href="#" id="navbarDropdownMenuLink" 
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <span>username</span>
+                                    <a class="dropdown-item" href="/user/profile">Profile</a>
+                                    {{!-- <a class="dropdown-item" href="">Setting</a> --}}
+                                    <a class="dropdown-item" href="/user/logout">Logout</a>
+                                </div>
+                            </li>
+                        {{else}}
+                             <li class="conn-li align-self-center">
+                                <a class="connecter" href="/user/login">Se Connecter</a>
+                            </li>
+                        {{/if}}
                     </ul>
                 </div>
-                <div class="navbar-nav ms-auto">
+                {{!-- <div class="navbar-nav ms-auto">
                     <a href="/user/login" class="nav-item nav-link">Login</a>
-                </div>
+                </div> --}}
             </nav>
-        </div> --}}
-
+        </div>
+{{!-- 
         <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid">
             <a href="#" class="navbar-brand">
@@ -58,8 +63,14 @@
                 </div>
 
                 <div class="navbar-nav ms-auto">
-                    <a href="/user/login" class="nav-item nav-link">Login</a>
-                </div>
+                    <a href="/user/login" class="nav-item nav-link">Login</a> --}}
+                    {{!-- <h1>dd{{test 5}}</h1> --}}
+                    {{!-- {{#test 5 5}}
+                    <h1>kfkdfkld:k</h1>
+                    {{!-- {{else}} --}}
+                    {{!-- <h1>okokok</h1> --}}
+                    {{!-- {{/test}}  --}}
+                {{!-- </div> --}}
             </div>
         </div>
     </nav>

@@ -3,4 +3,40 @@
     border-radius: 3px;
     color:white;
 }
+.content{
+    min-height: 60vh;
+}
+.user{
+    background-color:white;
+    text-align: center;
+    width: 58px;
+    border-radius: 50%;
+    border: solid white;
+    font-size: 37px;
+}
+ul li{
+    align-self: center;
+}
+.dropdown-item{
+    display: none;
 
+}
+.show {display:block !important;}
+.dropdown{
+    position: relative;
+}
+
+.connecter{
+    color: #ceff3a !important
+
+}
+li .connecter{
+    text-decoration: none;
+    /* margin-left: 15px; */
+    padding:5px 0 5px 0;
+}
+
+.conn-li{
+    border-radius:5px;
+    font-weight: bold;
+}
