@@ -15,6 +15,7 @@ route.get('/user/login', async(req, res)=>{
         console.log(token);
         const decoded = jwt.verify(token, key);
         const user=await User.findById(decoded.id);
+       
         res.render('pages/dashboard', {
             name:user.firstname,
             email:user.email
@@ -28,6 +29,7 @@ route.get('/user/login', async(req, res)=>{
 route.post('/user/login', async(req, res)=>{
     try{
         const user=await loginService.loginPost(req.body.email);
+        
         // console.log(user);
         if(user){
            const authResult=await bcrypt.compare(req.body.password, user.password);
@@ -41,8 +43,8 @@ route.post('/user/login', async(req, res)=>{
                name:user.firstname,
                email:user.email
                });
-               loginService.log.login=1;
            }else{
+                
                res.json({message:'Auth Failed'});
            }
        }
@@ -62,7 +64,5 @@ route.post('/user/logout', (req, res)=>{
     console.log('logout');
     res.redirect('/');
 });
-route.get('/user/profile', (req, res)=>{
-    res.render('pages/profile', {firstname:'Magamou', lastname:'Gueye'});
-})
+
 module.exports=route;
