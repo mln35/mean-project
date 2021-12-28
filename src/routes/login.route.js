@@ -3,29 +3,23 @@ const route = express.Router();
 const loginService=require('../services/login.service');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
-const registerService=require('../services/register.service');
 const User=require('../model/user.model');
-// route.get('/user/login',async (req,res)=>{
-//     res.render('pages/login', {error:loginService.log.__NO_ERROR});
-// });
+
 let key = process.env.TOKEN_KEY;
 
 route.get('/user/login', async(req, res)=>{
     const tokenCookie=req.headers.cookie;
-    console.log('##############');
-
-    console.log(tokenCookie);
-    console.log('######################');
-
     if(tokenCookie){
         console.log('/user/login--get');
-        
         const token=tokenCookie.split(';').filter(t => t.includes('token'))[0].split("=")[1];
         console.log(token);
         const decoded = jwt.verify(token, key);
         const user=await User.findById(decoded.id);
-        res.render('pages/dashboard');
-        // res.json({message:'dashboard'});
+        
+        res.render('main', {
+            name:user.firstname,
+            email:user.email
+            });
     }
     else{
         res.render('pages/login'); 
@@ -48,6 +42,7 @@ route.post('/user/login', async(req, res)=>{
                name:user.firstname,
                email:user.email
                });
+               loginService.log.login=1;
            }else{
                res.json({message:'Auth Failed'});
            }
@@ -61,51 +56,12 @@ route.post('/user/login', async(req, res)=>{
        }    
 });
 
-
-// route.get('user/register', async(req, res)=>{
-//     const tokenCookie=req.headers.cookie;
-//     if(tokenCookie!=undefined){
-//         const token=tokenCookie.split('=')[1];
-//         const decoded=jwt.verify(token, 'secretsecret');
-//         const user=await User.findById(decoded.id);
-//         res.redirect('/');
-//     }
-//     res.render('pages/register');
-// })
-// route.post('/user/login', async(req, res)=>{
-//     // registerService.getAllUsers().then((allUser)=>{
-//     //     console.log(req.body);
-//     //     console.log(allUser);
-//     // }).catch((e)=>{
-//     //     console.log(e);
-//     // });
-//     loginService.loginPost(req).then((user)=>{
-//         if(user){
-//             console.log(`user:${user.firstname} password:${user.password}`);
-//             // res.render('main', {user:user});
-//             loginService.log.login=1;
-//             res.redirect('/');
-//         }
-//         else{
-//             console.log('Error');
-//             res.render('pages/login', {error: 1});
-//         }
-//     }).catch((e)=>{
-//         console.log(e);
-//     });
-// });
-// route.get('/user/logout', async(req, res)=>{
-//     try{
-//         res.render('pages/dashboard');
-//     }
-//     catch(error){
-//         console.log(error);
-//     }
-    
-// });
-route.post('/user/logout', (req, res)=>{
+route.get('/user/logout', (req, res)=>{
     res.clearCookie('token');
     console.log('logout');
-    res.redirect('/');
+    res.redirect('/',{logged:false});
 });
+route.get('/user/profile', (req, res)=>{
+    res.render('pages/profile', {firstname:'Magamou', lastname:'Gueye'});
+})
 module.exports=route;

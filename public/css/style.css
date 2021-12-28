@@ -22,3 +22,21 @@ ul li{
 
 }
 .show {display:block !important;}
+.dropdown{
+    position: relative;
+}
+
+.connecter{
+    color: #ceff3a !important
+
+}
+li .connecter{
+    text-decoration: none;
+    /* margin-left: 15px; */
+    padding:5px 0 5px 0;
+}
+
+.conn-li{
+    border-radius:5px;
+    font-weight: bold;
+}
