@@ -46,7 +46,7 @@ app.use('/',registerRouter);
 app.use('/', loginRouter);
 app.use('/',mainRouter);
 app.use('/', profileRouter);
-
+app.locals.current="111111111111111";
 app.get('/',(req,res)=>{
    res.json({message:'404 Not found'});
 });

@@ -15,7 +15,6 @@ route.get('/user/login', async(req, res)=>{
         console.log(token);
         const decoded = jwt.verify(token, key);
         const user=await User.findById(decoded.id);
-       
         res.render('pages/dashboard', {
             name:user.firstname,
             email:user.email
@@ -43,6 +42,8 @@ route.post('/user/login', async(req, res)=>{
                name:user.firstname,
                email:user.email
                });
+               req.app.locals.current=user;
+            //    console.log(`in route.get user/login ${req.app.locals.current}`);
            }else{
                 
                res.json({message:'Auth Failed'});
