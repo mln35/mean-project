@@ -1,3 +1,6 @@
+.navbar{
+    height: 75px;
+}
 .error{
     background-color: rgb(212, 95, 59);
     border-radius: 3px;

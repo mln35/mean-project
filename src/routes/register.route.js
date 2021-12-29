@@ -4,38 +4,12 @@ const route = express.Router();
 const registerService = require('../services/register.service');
 
 route.get('/user/register',async (req,res)=>{
-    res.render('pages/register')
+    res.render('pages/register');
 });
 
-route.get('/user/verify/:id',async (req,res)=> {
+route.get('/user/verify/:id',registerService.verifyEmail);
 
-    await registerService.verify(req.params.id)
-    res.json({msg:`Your mail is verified: ${req.params.id} :)`})
-    // let id = req.params.id;
-    // Verification.find({verificationToken})
-});
-
-route.post('/user/register',async (req,res)=>{
-        let user = req.body;
-        // user.verificationToken = '';
-        registerService.saveUser(user).then((r)=>{
-            console.log(r);
-            if(r && r.message) 
-                console.log('res',r);
-            res.render('pages/login');
-        }).catch((e)=>{
-            console.log(e);
-            res.render('pages/register',{msg:e.message});
-            // console.log(e);
-        });
-        // if(result.error){
-        //     console.log('there was error');
-        //     res.json(result.error);
-        // }else{
-        //     console.log('pb');
-        //     res.render('pages/login');
-        // }
-    });
+route.post('/user/register',registerService.register);
 
 
 // route.get('/',async (req,res)=>{

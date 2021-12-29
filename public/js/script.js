@@ -12,3 +12,11 @@ if(icon){
     }
 });
 }
+
+mess = "testing if logged in"
+edit = ()=>{
+  let add = document.querySelector("#address");
+  let newAdd = document.createElement('input');
+  let parent = document.querySelector('.parent');
+parent = newAdd;
+}

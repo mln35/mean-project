@@ -32,7 +32,7 @@ app.engine('hbs',handlebars.engine({
     defaultLayout:'index',
     helpers:{
         test:(a, b, options)=>{
-            if(a===b){
+            if(a === b){
                 return options.fn(this);
             }
             return options.inverse(this);
