@@ -24,7 +24,7 @@ ul li{
     display: none;
 
 }
-.show {display:block !important;}
+
 .dropdown{
     position: relative;
 }
@@ -42,4 +42,16 @@ li .connecter{
 .conn-li{
     border-radius:5px;
     font-weight: bold;
+}
+.reset-show{
+    display: none !important;
+}
+/* .login-show{
+    display:block;
+} */
+.hide{
+    display:none !important;
+}
+.show {
+    display:block !important;
 }

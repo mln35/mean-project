@@ -1,39 +1,28 @@
 <div class="container">
         <div class="row">
+            <h1>Reset password</h1>
             <div class="col-md-4 offset-md-4">
                 <div class="login-form bg-light mt-4 p-4">
-                            <div class="row">
-            <h1>Reset password</h1>
-            
-                    <form action="/user/reset" method="POST" class="reset-show row g-3">
-                        <h4>Login</h4>
-                        <div class="col-12">
-                            <label>User email</label>
-                            <input type="email" name="email" class="form-control" placeholder="User email">
-                        </div>
-                       
-                        <div class="col-12">
-                            <a class="btn btn-success" href="/user/login">Cancel</a>
-                            <button type="submit" class="btn btn-dark float-end">Reset</button>
-                        </div>
-                    </form>
-                   
-                    <form action="/user/login" method="POST" class="login-show show row g-3">
+                    <form action="/user/login" method="POST" class="row g-3">
                         <h4>Login</h4>
                         <div class="col-12">
                             <label>User email</label>
                             <input type="email" name="email" class="form-control" placeholder="User email">
                         </div>
                         <div class="col-12">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Password">
+                            <label>New Password</label>
+                            <input type="password" name="password1" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="col-12">
+                            <label>Repeat Password</label>
+                            <input type="password" name="password2" class="form-control" placeholder="Password">
                         </div>
                         <div class="col-12">
                             {{!-- <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="rememberMe">
                                 <label class="form-check-label" for="rememberMe"> Remember me</label>
                             </div> --}}
-                            <a class=" dropdown-item" onclick="reset()">Forgot password?</a>
+                            <a class="dropdown-item" href="#">Forgot password?</a>
                             {{!-- {{#if error}}
                             <span>the address or the password is not correct</span>
                             {{/if}} --}}
@@ -44,7 +33,6 @@
                     </form>
                     <hr class="mt-4">
                     <div class="col-12">
-
                         <p class="text-center mb-0">Have not account yet? <a href="/user/register">Signup</a></p>
                     </div>
                 </div>

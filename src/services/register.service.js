@@ -19,7 +19,7 @@ const getAllUsers = async ()=>{
     let users = await User.find();
     return users;
 }
-getVerificationToken = (u)=> {
+const getVerificationToken = (u)=> {
     return jwt.sign(
         {ID: u._id},
         process.env.TOKEN_KEY,
@@ -57,7 +57,7 @@ const saveUser = async(user) => {
     mailService.sendMail(_user.email, verificationToken);
 }
 
-register = async (req,res)=>{
+const register = async (req,res)=>{
     let user = req.body;
     // user.verificationToken = '';
     saveUser(user).then((data)=>{
@@ -78,12 +78,19 @@ register = async (req,res)=>{
     //     res.render('pages/login');
     // }
 }
+const reset = (req, res) => {
 
+}
+const saveNewPassword = (req, res) => {
+
+}
 
 module.exports = {
     getAllUsers,
     saveUser,
     getVerificationToken,
     verifyEmail,
-    register
+    register,
+    reset,
+    saveNewPassword
 }

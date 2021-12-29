@@ -20,3 +20,10 @@ edit = ()=>{
   let parent = document.querySelector('.parent');
 parent = newAdd;
 }
+
+reset = ()=> {
+  console.log('reset');
+  document.querySelector(".reset-show").classList.toggle("show");
+  document.querySelector(".login-show").classList.toggle("hide");
+
+}

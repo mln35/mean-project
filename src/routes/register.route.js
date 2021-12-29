@@ -11,6 +11,18 @@ route.get('/user/verify/:id',registerService.verifyEmail);
 
 route.post('/user/register',registerService.register);
 
+route.get('/user/reset/:id',registerService.reset);
+
+route.get('/user/reset', (req,res)=>{
+    res.render('pages/reset.hbs')
+});
+
+route.get('/user/reset-request', (req,res)=>{
+    res.render('pages/reset-request.hbs')
+});
+
+route.post('/user/reset',registerService.saveNewPassword);
+
 
 // route.get('/',async (req,res)=>{
 //     let user = await userServices.createUser(req.body);
