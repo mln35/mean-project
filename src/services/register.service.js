@@ -50,6 +50,7 @@ async function verify(token) {
     });
 
 }
+
 module.exports = {
     getAllUsers,
     saveUser,

@@ -42,7 +42,6 @@ route.post('/user/login', async(req, res)=>{
                name:user.firstname,
                email:user.email
                });
-               req.app.locals.current=user;
             //    console.log(`in route.get user/login ${req.app.locals.current}`);
            }else{
                 
@@ -63,6 +62,7 @@ route.post('/user/login', async(req, res)=>{
 route.post('/user/logout', (req, res)=>{
     res.clearCookie('token');
     console.log('logout');
+    req.app.locals.log=0;
     res.redirect('/');
 });
 

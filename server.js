@@ -10,14 +10,25 @@ const path = require('path');
 const port = process.env.PORT || 8080;
 const host = process.env.HOST || '127.0.0.1';
 const mongoUrl=process.env.MONGO_URL;
-try {
-    mongoose.connect(mongoUrl,()=>{
-        console.log('Successfully connected to mongodb instance');
-    });
+// try {
+//     mongoose.connect(mongoUrl,()=>{
+//         console.log('Successfully connected to mongodb instance');
+//     });
     
-} catch (error) {
-    console.log('Unable to connect to mongodb instance', error);
-}
+// } catch (error) {
+//     console.log('Unable to connect to mongodb instance', error);
+// }
+
+(async () => {
+    try{    
+        await mongoose.connect(mongoUrl);
+        console.log('Connected to the database!');
+    }
+    catch(e){
+        console.log(e.message);
+    }
+})()
+
 
 const app=express();
 app.use(express.urlencoded({ extended: false }));
@@ -46,7 +57,8 @@ app.use('/',registerRouter);
 app.use('/', loginRouter);
 app.use('/',mainRouter);
 app.use('/', profileRouter);
-app.locals.current="111111111111111";
+// app.locals.current="111111111111111";
+
 app.get('/',(req,res)=>{
    res.json({message:'404 Not found'});
 });
