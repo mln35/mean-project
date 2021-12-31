@@ -1,7 +1,5 @@
 const User=require('../model/user.model');
-
 const Reset=require('../model/reset.model');
-
 const jwt = require("jsonwebtoken");
 
 duplicateEmail = (req, res, next) => {
@@ -73,13 +71,10 @@ verifyToken = (req, res, next) => {
 verifyResetToken = async (req, res, next) => {
   // module.exports.checkConnection = async (req, res, next) => {
     const tokenCookie = req.headers.cookie;
-    console.log('');
     if (!tokenCookie) {
-      console.log('---------------');
       res.status(400).send({ message: "No token provided!" });
       return;
     }
-    console.log('===========');
     const token = tokenCookie
       .split(";")
       .filter((t) => t.includes("reset"))[0]
