@@ -5,6 +5,8 @@ const mainRouter = require('./src/routes/main.route');
 const registerRouter = require('./src/routes/register.route');
 const loginRouter=require('./src/routes/login.route');
 const handlebars = require('express-handlebars');
+var cookieParser = require('cookie-parser')
+
 const path = require('path');
 const port = process.env.PORT || 8080;
 const host = process.env.HOST || '127.0.0.1';
@@ -19,6 +21,7 @@ try {
 }
 
 const app=express();
+app.use(cookieParser())
 app.locals.logged=false;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -42,9 +45,6 @@ app.engine('hbs',handlebars.engine({
 app.set('view engine','hbs');
 app.set('views',path.join(__dirname, 'src/views'));
 
-// app.use('/',(req, res) => {
-//     res.render('pages/register')
-// })
 require('./src/middlewares/isConnected')(app)
 app.use('/',registerRouter);
 app.use('/', loginRouter);

@@ -21,9 +21,13 @@ edit = ()=>{
 parent = newAdd;
 }
 
-reset = ()=> {
+loginReset = ()=> {
   console.log('reset');
   document.querySelector(".reset-show").classList.toggle("show");
   document.querySelector(".login-show").classList.toggle("hide");
 
+}
+
+createNewPassword = () => {
+  confirm('Send')
 }

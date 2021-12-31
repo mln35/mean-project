@@ -1,19 +1,12 @@
 
 
 const User=require('../model/user.model');
+const Reset=require('../model/reset.model');
 const Verification=require('../model/verification.model');
 
 const mailService = require('../services/email.service');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
-// save = async(user) => {
-//     const u = new User({
-//     firstname: req.body.username,
-//     email: req.body.email,
-//     password: bcrypt.hashSync(req.body.password, 8)
-//   });
-// }
 
 const getAllUsers = async ()=>{
     let users = await User.find();
@@ -34,6 +27,7 @@ const verify = async (token) => {
             console.log(user);
         }
     });
+    Verification.findOneAndRemove({verificationToken:token})
 
 }
 const verifyEmail = async (req,res)=> {
@@ -54,7 +48,7 @@ const saveUser = async(user) => {
     );
     const _verif = await Verification.create({email:user.email, verificationToken:verificationToken});
 
-    mailService.sendMail(_user.email, verificationToken);
+    mailService.sendMail(_user.email, verificationToken,'verify');
 }
 
 const register = async (req,res)=>{
@@ -78,11 +72,26 @@ const register = async (req,res)=>{
     //     res.render('pages/login');
     // }
 }
-const reset = (req, res) => {
-
+const reset = async (req, res) => {
+    let resetRequest = req.body;
+    let resetToken = jwt.sign(
+        'user_emai_reset',
+        process.env.TOKEN_KEY
+            );
+    const _verif = await Reset.create({email:resetRequest.email, resetToken:resetToken});
+    mailService.sendMail(_verif.email, resetToken,'reset');
+    res.render('pages/login',{ message:`A mail was sent to ${_verif.email}, check your inbox`});
 }
 const saveNewPassword = (req, res) => {
+    pass = req.body.password;
+    pass = bcrypt.hashSync(pass, 8);
 
+    User.findOneAndUpdate({email:req.email},{$set:{password:pass}}).then((user) => {
+        if(user){
+            Reset.findOneAndRemove({resetToken:req.token});
+            res.render('pages/login',{resetMessage:'Password successfully reset'});
+        }
+    })
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
-.navbar{
+/* .navbar{
     height: 75px;
-}
+} */
 .error{
     background-color: rgb(212, 95, 59);
     border-radius: 3px;
@@ -54,4 +54,27 @@ li .connecter{
 }
 .show {
     display:block !important;
+}
+.forgot-password{
+    cursor: pointer;
+}
+
+.header{
+    height: 10%;
+}
+.content{
+    height: 80%;
+}
+footer{
+    
+    /* position: absolute !important; */
+    bottom: 0 !important; 
+    height: 10%;
+}
+.dropdown-menu {
+    left: -90px;
+}
+
+.message{
+    background-color: rgb(153, 214, 153);
 }
