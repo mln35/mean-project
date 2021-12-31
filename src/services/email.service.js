@@ -5,8 +5,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   host: "smtp.gmail.com",
   auth: {
-    user: 'mean.bootcamp@gmail.com',
-    pass: 'mean.bootcamp.2021'
+    user: 'meanpjt@gmail.com',
+    pass: 'meanpjt2021'
   },
   secure: true
 });//
@@ -14,7 +14,7 @@ exports.sendMail =(dest, verificationToken) => {
     const port = process.env.PORT || 8080;
     const url = `http://localhost:${port}/user/verify/${verificationToken}`
     const mailOptions = {
-    from: 'mean.bootcamp@gmail.com',
+    from: 'meanpjt@gmail.com',
     to: dest,
     subject: 'MEAN-PROJECT Account Activation',
     html: `Please Click <a href = '${url}'>here</a> to confirm your email.`
