@@ -1,79 +1,9 @@
 <div class="container">
-    <div class="main-body">
-    
-          {{!-- <!-- Breadcrumb -->
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-            </ol>
-          </nav>
-          <!-- /Breadcrumb --> --}}
-    
-          <div class="row gutters-sm ">
-            {{>cardLeft}}
-            <div class="col-md-8">
-                <h1>profile</h1>
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      User full name
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      User email
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      User phone number
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Mobile</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      User mobile
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row parent">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
-                    </div>
-                    <div id="address" class="col-sm-9 text-secondary">
-                      User Address
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <button class="btn btn-primary" onclick="edit()"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-
-        </div>
+  <div class="main-body">
+    <div class="row gutters-sm ">
+      <h3 class="text-center" id="tite">Profile</h3>
+      {{>cardLeft}}
+      {{>cardRight}}
     </div>
-
+  </div>
+</div>

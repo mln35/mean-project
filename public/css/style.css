@@ -67,9 +67,9 @@ li .connecter{
 }
 footer{
     
-    /* position: absolute !important; */
+    position: relative !important;
     bottom: 0 !important; 
-    height: 10%;
+    height: 80px;
 }
 .dropdown-menu {
     left: -90px;

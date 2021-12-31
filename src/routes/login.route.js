@@ -68,6 +68,7 @@ route.get("/user/logout", (req, res) => {
   res.clearCookie("reset");
   res.render("main");
 });
+
 route.get("/user/profile", (req, res) => {
   res.render("pages/profile", { firstname: "Magamou", lastname: "Gueye" });
 });
