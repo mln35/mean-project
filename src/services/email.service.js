@@ -5,8 +5,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   host: "smtp.gmail.com",
   auth: {
-    user: 'meanpjt@gmail.com',
-    pass: 'meanpjt2021'
+    user: 'mean.bootcamp@gmail.com',
+    pass: 'mean.bootcamp.2021'
   },
   secure: true
 });//
@@ -26,9 +26,10 @@ exports.sendMail =(dest, verificationToken,type) => {
       subject = 'MEAN-PROJECT Password reset';
       html = `Please follow <a href = '${url}'>this</a> link and provide new password.`;
     }
+    
 
     const mailOptions = {
-      from: 'mean.bootcamp@gmail.com',
+      from: 'meanpjt@gmail.com',
       to: dest,
       subject: subject,
       html: html
@@ -61,5 +62,4 @@ exports.verifyNewEmail=(dest, confirmCode) => {
       console.log('Email sent: ' + info.response);
   }
   });
-  
 }

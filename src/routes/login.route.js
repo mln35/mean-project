@@ -41,10 +41,11 @@ route.post("/user/login", async (req, res) => {
                     name: user.firstname,
                     email: user.email,
                 });
+                req.app.locals.current=user;
             } else {
                 res.render("pages/login", { message: `Login failed` });
             }
-        }
+        }else
         if (user && !user.verified) {
             res.render("pages/login", {
                 message: `Your account is waiting for verification`,
@@ -66,7 +67,7 @@ route.get("/user/logout", (req, res) => {
     res.render("main");
 });
 
-route.get("/user/profile", (req, res) => {
-    res.render("pages/profile", { firstname: "Magamou", lastname: "Gueye" });
-});
+// route.get("/user/profile", (req, res) => {
+//     res.render("pages/profile", { firstname: "Magamou", lastname: "Gueye" });
+// });
 module.exports = route;

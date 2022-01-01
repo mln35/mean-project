@@ -45,14 +45,7 @@ app.engine('hbs',handlebars.engine({
     extname:'hbs',
     layoutsDir:`${__dirname}/src/views/layouts`,
     defaultLayout:'index',
-    // helpers:{
-    //     test:(a, b, options)=>{
-    //         if(a === b){
-    //             return options.fn(this);
-    //         }
-    //         return options.inverse(this);
-    //     }
-    // }
+
 }));
 app.set('view engine','hbs');
 app.set('views',path.join(__dirname, 'src/views'));

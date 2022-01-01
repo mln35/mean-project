@@ -17,9 +17,7 @@
     border: solid white;
     font-size: 37px;
 }
-ul li{
-    align-self: center;
-}
+
 .dropdown-item{
     display: none;
 
@@ -77,4 +75,7 @@ footer{
 
 .message{
     background-color: rgb(153, 214, 153);
+}
+.left-user-icon{
+    font-size: 60px;
 }

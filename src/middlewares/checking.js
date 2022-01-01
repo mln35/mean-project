@@ -48,25 +48,25 @@ checkPasswordLength = (req, res, next) => {
   next();
 };
 
-verifyToken = (req, res, next) => {
-  module.exports.checkConnection = (req, res, next) => {
-    const tokenCookie = req.headers.cookie;
-    if (!tokenCookie) {
-      res.status(400).send({ message: "No token provided!" });
-      return;
-    }
-    const token = tokenCookie
-      .split(";")
-      .filter((t) => t.includes("token"))[0]
-      .split("=")[1];
-    console.log(token);
-    if (!token) {
-      res.status(400).send({ message: "No token provided!" });
-      return;
-    }
-    next();
-  };
-};
+// verifyToken = (req, res, next) => {
+//   module.exports.checkConnection = (req, res, next) => {
+//     const tokenCookie = req.headers.cookie;
+//     if (!tokenCookie) {
+//       res.status(400).send({ message: "No token provided!" });
+//       return;
+//     }
+//     const token = tokenCookie
+//       .split(";")
+//       .filter((t) => t.includes("token"))[0]
+//       .split("=")[1];
+//     console.log(token);
+//     if (!token) {
+//       res.status(400).send({ message: "No token provided!" });
+//       return;
+//     }
+//     next();
+//   };
+// };
 
 verifyResetToken = async (req, res, next) => {
   // module.exports.checkConnection = async (req, res, next) => {
@@ -100,6 +100,6 @@ module.exports = {
   checkPasswordLength,
   existingEmail,
   duplicateEmail,
-  verifyToken,
+  // verifyToken,
   verifyResetToken
 };

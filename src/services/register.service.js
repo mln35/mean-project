@@ -12,7 +12,7 @@ const getAllUsers = async ()=>{
     let users = await User.find();
     return users;
 }
-const getVerificationToken = (u)=> {
+const signUser = (u)=> {
     return jwt.sign(
         {ID: u._id},
         process.env.TOKEN_KEY,
@@ -20,6 +20,7 @@ const getVerificationToken = (u)=> {
     );
 }
 const verify = async (token) => {
+    try{
     Verification.findOne({verificationToken:token}).then(async (data) => {
         if(data){
             console.log('mail ==> ',data.email)
@@ -28,12 +29,15 @@ const verify = async (token) => {
         }
     });
     Verification.findOneAndRemove({verificationToken:token})
+    res.render("pages/login", { message: `Your mail is verified` });
 
+    }catch(e){
+        res.render("pages/login", { message: `Email verification failed` });
+    }
 }
 const verifyEmail = async (req,res)=> {
-
-    await verify(req.params.id)
-    res.json({message:`Your mail is verified: ${req.params.id} :)`})
+    
+    verify(req.params.id)
 
  }
 
@@ -87,8 +91,9 @@ const reset = async (req, res) => {
 module.exports = {
     getAllUsers,
     saveUser,
-    getVerificationToken,
+    signUser,
     verifyEmail,
     register,
     reset,
+    verify
 }
