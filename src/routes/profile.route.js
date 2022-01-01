@@ -60,10 +60,12 @@ route.post('/user/profile/update', async(req, res)=>{
     console.log(`newData:${user.firstname}`);
     if(req.body.email){
         if(req.body.email===oldUser.email){
+            //email not changed
             console.log("equality...email");
             try{
                 await User.findOneAndUpdate(oldUser._id, user, {new:true});
-                res.redirect('/user/profile');
+                res.render('pages/profile',{prof:user, message:`Your modification was saved`});
+                // res.redirect('/user/profile');
             }
             catch(e){
                 console.log(e.message);
