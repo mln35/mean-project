@@ -1,3 +1,6 @@
+/* .navbar{
+    height: 75px;
+} */
 .error{
     background-color: rgb(212, 95, 59);
     border-radius: 3px;
@@ -14,14 +17,12 @@
     border: solid white;
     font-size: 37px;
 }
-ul li{
-    align-self: center;
-}
+
 .dropdown-item{
     display: none;
 
 }
-.show {display:block !important;}
+
 .dropdown{
     position: relative;
 }
@@ -39,4 +40,42 @@ li .connecter{
 .conn-li{
     border-radius:5px;
     font-weight: bold;
+}
+.reset-show{
+    display: none !important;
+}
+/* .login-show{
+    display:block;
+} */
+.hide{
+    display:none !important;
+}
+.show {
+    display:block !important;
+}
+.forgot-password{
+    cursor: pointer;
+}
+
+.header{
+    height: 10%;
+}
+.content{
+    height: 80%;
+}
+footer{
+    
+    position: relative !important;
+    bottom: 0 !important; 
+    height: 80px;
+}
+.dropdown-menu {
+    left: -90px;
+}
+
+.message{
+    background-color: rgb(153, 214, 153);
+}
+.left-user-icon{
+    font-size: 60px;
 }
