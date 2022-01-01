@@ -81,3 +81,7 @@ footer{
 .left-user-icon{
     font-size: 60px;
 }
+
+.container{
+    min-height:90vh;
+}
