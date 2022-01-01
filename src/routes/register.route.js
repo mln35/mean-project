@@ -11,13 +11,13 @@ route.get('/user/register',async (req,res)=>{
 
 route.get('/user/verify/:id',registerService.verifyEmail);
 
-route.post('/user/register',registerService.register);
+route.post('/user/register',[checking.duplicateEmail],registerService.register);
 
 route.get('/user/reset-request',(req,res)=>{
     res.render('pages/reset-request.hbs')
 });
 
-route.post('/user/reset-request',[checking.duplicateEmail],registerService.reset);
+route.post('/user/reset-request',registerService.reset);
 
 route.get('/user/reset/:token', resetService.redirect);
 

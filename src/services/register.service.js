@@ -25,19 +25,27 @@ const verify = async (token) => {
         if(data){
             console.log('mail ==> ',data.email)
             let user = await User.findOneAndUpdate({email:data.email},{verified:true});
+            await Verification.findByIdAndRemove(data._id);
             console.log(user);
+            console.log(data._id);
         }
     });
-    Verification.findOneAndRemove({verificationToken:token})
-    res.render("pages/login", { message: `Your mail is verified` });
+    
+    
 
     }catch(e){
-        res.render("pages/login", { message: `Email verification failed` });
+        throw(e);
     }
 }
 const verifyEmail = async (req,res)=> {
+    try{
+        verify(req.params.id);
+        res.render("pages/login", { message: `Your mail is verified` });
+    }
+    catch(e){
+        res.render("pages/login", { message: `Verification failed` });
+    }
     
-    verify(req.params.id)
 
  }
 
@@ -62,7 +70,7 @@ const register = async (req,res)=>{
         console.log(data);
         if(data && data.message) 
             console.log('res',data);
-        res.render('pages/login');
+            res.render('pages/login',{ message:`A mail was sent to ${_verif.email}, check your inbox`});
     }).catch((e)=>{
         console.log(e);
         res.render('pages/register',{message:e.message});
