@@ -6,7 +6,6 @@ const registerRouter = require('./src/routes/register.route');
 const loginRouter=require('./src/routes/login.route');
 const profileRouter=require('./src/routes/profile.route');
 const handlebars = require('express-handlebars');
-var cookieParser = require('cookie-parser')
 
 const path = require('path');
 const port = process.env.PORT || 8080;
@@ -33,7 +32,6 @@ const mongoUrl=process.env.MONGO_URL;
 
 
 const app=express();
-app.use(cookieParser())
 app.locals.logged=false;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

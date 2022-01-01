@@ -92,8 +92,10 @@ route.post('/user/profile/update', async(req, res)=>{
         }
     }
     else{
-        console.log("email is not defined");
-        res.json({message:"ERROR:the eamil address is not defined"});
+        // console.log("email is not defined");
+        // res.json({message:"ERROR:the eamil address is not defined"});
+        res.render("pages/profile", { message: `Email address is required` });
+
     }    
     
 });
@@ -112,7 +114,6 @@ route.get('/user/profile', async (req, res)=>{
         console.log(e);
     })
 });
-
 
 route.get("/user/profile/update/newEmail", (req, res) => {
   res.render("pages");
