@@ -24,7 +24,7 @@ exports.sendMail =(dest, verificationToken,type) => {
     else if(type === 'reset'){
       url = `http://localhost:${port}/user/reset/${verificationToken}`
       subject = 'MEAN-PROJECT Password reset';
-      html = `Please follow <a href = '${url}'>this</a> and provide new password.`;
+      html = `Please follow <a href = '${url}'>this</a> link and provide new password.`;
     }
 
     const mailOptions = {

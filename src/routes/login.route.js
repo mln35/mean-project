@@ -8,68 +8,65 @@ const User = require("../model/user.model");
 let key = process.env.TOKEN_KEY;
 
 route.get("/user/login", async (req, res) => {
-  const tokenCookie = req.headers.cookie;
-  if (req.app.locals.logged === true) {
-    console.log("/user/login--get");
-    const token = tokenCookie
-      .split(";")
-      .filter((t) => t.includes("token"))[0]
-      .split("=")[1];
-    console.log(token);
-    const decoded = jwt.verify(token, key);
-    const user = await User.findById(decoded.id);
-    res.render("main");
-  } else {
-    res.render("pages/login");
-  }
+    const tokenCookie = req.headers.cookie;
+    if (req.app.locals.logged === true) {
+        console.log("/user/login--get");
+        const token = tokenCookie
+            .split(";")
+            .filter((t) => t.includes("token"))[0]
+            .split("=")[1];
+        console.log(token);
+        const decoded = jwt.verify(token, key);
+        const user = await User.findById(decoded.id);
+        res.render("main");
+    } else {
+        res.render("pages/login");
+    }
 });
 
 route.post("/user/login", async (req, res) => {
-  try {
-    const user = await loginService.loginPost(req.body.email);
-    // console.log(user);
-    if (user && user.verified) {
-      const authResult = await bcrypt.compare(req.body.password, user.password);
-      if (authResult) {
-        const token = jwt.sign({ id: user._id }, key, {
-          expiresIn: "24h",
-        });
-        //    console.log(`in loginForm token:${token}`);
-        res.cookie("token", token);
-        res.locals.logged = true;
-        res.render("main", {
-          name: user.firstname,
-          email: user.email,
-        });
-        loginService.log.login = 1;
-      }else     if (user && !user.verified) {
-        res.render("pages/login", { message: `Your mail is not verified` });
-    }
-
-       else {
+    try {
+        const user = await loginService.loginPost(req.body.email);
+        // console.log(user);
+        if (user && user.verified) {
+            const authResult = await bcrypt.compare(req.body.password, user.password);
+            if (authResult) {
+                const token = jwt.sign({ id: user._id }, key, {
+                    expiresIn: "24h",
+                });
+                //    console.log(`in loginForm token:${token}`);
+                res.cookie("token", token);
+                res.locals.logged = true;
+                res.render("main", {
+                    name: user.firstname,
+                    email: user.email,
+                });
+            } else {
+                res.render("pages/login", { message: `Login failed` });
+            }
+        }
+        if (user && !user.verified) {
+            res.render("pages/login", {
+                message: `Your account is waiting for verification`,
+            });
+        } else {
+            res.render("pages/login", { message: `Login failed` });
+            //    res.json({message:'Auth Failed'});
+        }
+    } catch (error) {
         res.render("pages/login", { message: `Login failed` });
-
-        //    res.json({message:'Auth Failed'});
-      }
-    } else {
-      res.render("pages/login", { message: `Login failed` });
-      //    res.json({message:'ERROR'});
+        // res.json({ message: error.message });
     }
-  } catch (error) {
-    res.render('pages/login',{message:`Login failed`});
-    // res.json({ message: error.message });
-  }
-
 });
 
 route.get("/user/logout", (req, res) => {
-  res.locals.logged = false;
-  res.clearCookie("token");
-  res.clearCookie("reset");
-  res.render("main");
+    res.locals.logged = false;
+    res.clearCookie("token");
+    res.clearCookie("reset");
+    res.render("main");
 });
 
 route.get("/user/profile", (req, res) => {
-  res.render("pages/profile", { firstname: "Magamou", lastname: "Gueye" });
+    res.render("pages/profile", { firstname: "Magamou", lastname: "Gueye" });
 });
 module.exports = route;

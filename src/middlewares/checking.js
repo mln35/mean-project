@@ -39,7 +39,7 @@ existingEmail = (req, res, next) => {
 };
 
 checkPasswordLength = (req, res, next) => {
-  if (req.body.password.trim().length < 6) {
+  if (req.body.password.length < 6) {
     res
       .status(400)
       .send({ message: "Failed! Password must be at least six characters!" });

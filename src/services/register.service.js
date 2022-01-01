@@ -33,7 +33,7 @@ const verify = async (token) => {
 const verifyEmail = async (req,res)=> {
 
     await verify(req.params.id)
-    res.json({msg:`Your mail is verified: ${req.params.id} :)`})
+    res.json({message:`Your mail is verified: ${req.params.id} :)`})
 
  }
 
@@ -61,7 +61,7 @@ const register = async (req,res)=>{
         res.render('pages/login');
     }).catch((e)=>{
         console.log(e);
-        res.render('pages/register',{msg:e.message});
+        res.render('pages/register',{message:e.message});
         // console.log(e);
     });
     // if(result.error){
@@ -82,17 +82,7 @@ const reset = async (req, res) => {
     mailService.sendMail(_verif.email, resetToken,'reset');
     res.render('pages/login',{ message:`A mail was sent to ${_verif.email}, check your inbox`});
 }
-const saveNewPassword = (req, res) => {
-    pass = req.body.password;
-    pass = bcrypt.hashSync(pass, 8);
 
-    User.findOneAndUpdate({email:req.email},{$set:{password:pass}}).then((user) => {
-        if(user){
-            Reset.findOneAndRemove({resetToken:req.token});
-            res.render('pages/login',{resetMessage:'Password successfully reset'});
-        }
-    })
-}
 
 module.exports = {
     getAllUsers,
@@ -101,5 +91,4 @@ module.exports = {
     verifyEmail,
     register,
     reset,
-    saveNewPassword
 }
