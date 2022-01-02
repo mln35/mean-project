@@ -1,10 +1,9 @@
 const express = require('express');
 const route = express.Router();
-const bcrypt=require('bcrypt');
-const Reset = require('../model/reset.model')
 const registerService = require('../services/register.service');
 const checking = require('../middlewares/checking');
-const resetService = require('../services/reset.service')
+const resetService = require('../services/reset.service');
+
 route.get('/user/register',async (req,res)=>{
     res.render('pages/register');
 });

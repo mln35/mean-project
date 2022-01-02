@@ -1,8 +1,6 @@
 const User = require("../model/user.model");
-const nodemail = require("nodemailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const express = require("express");
 let key = process.env.TOKEN_KEY;
 
 const loginPost = async (_email) => {

@@ -1,6 +1,4 @@
 const User=require('../model/user.model');
-const jwt=require('jsonwebtoken');
-let key = process.env.TOKEN_KEY;
 
 
 const updateProfile = async(_filter, _update)=>{

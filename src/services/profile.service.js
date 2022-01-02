@@ -9,12 +9,7 @@ let key = process.env.TOKEN_KEY;
 const update = async (req, res) => {
   let user = {};
   user = req.body;
-  console.log("---------------------------");
-  console.log(user);
-  console.log("---------------------------");
   const oldUser = await common.getUserByToken(req.headers.cookie);
-  console.log(`oldData:${oldUser}`);
-  console.log(`newData:${user.firstname}`);
   if (req.body.email) {
     if (req.body.email === oldUser.email) {
       //email not changed
