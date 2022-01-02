@@ -7,22 +7,7 @@ const User = require("../model/user.model");
 
 let key = process.env.TOKEN_KEY;
 
-route.get("/user/login", async (req, res) => {
-    const tokenCookie = req.headers.cookie;
-    if (req.app.locals.logged === true) {
-        console.log("/user/login--get");
-        const token = tokenCookie
-            .split(";")
-            .filter((t) => t.includes("token"))[0]
-            .split("=")[1];
-        console.log(token);
-        const decoded = jwt.verify(token, key);
-        const user = await User.findById(decoded.id);
-        res.render("main");
-    } else {
-        res.render("pages/login");
-    }
-});
+route.get("/user/login", loginService.goToLogin);
 
 route.post("/user/login", async (req, res) => {
     try {
@@ -41,7 +26,7 @@ route.post("/user/login", async (req, res) => {
                     name: user.firstname,
                     email: user.email,
                 });
-                req.app.locals.current=user;
+                req.app.locals.current = user;
             } else {
                 res.render("pages/login", { message: `Login failed` });
             }

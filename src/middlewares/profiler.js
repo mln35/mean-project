@@ -2,6 +2,7 @@ const User=require('../model/user.model');
 const jwt=require('jsonwebtoken');
 let key = process.env.TOKEN_KEY;
 const manageProfile=require('../services/profile.manage');
+
 defEmail = async(req, res, next) => {
     if(req.body.email){
         console.log(`In middleware verify email:${req.body.email}`);
@@ -47,6 +48,5 @@ emailComparator=async(req, res, next)=>{
     }
     
 }
-
 
 module.exports ={defEmail, emailComparator};

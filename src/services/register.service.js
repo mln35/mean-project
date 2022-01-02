@@ -58,9 +58,12 @@ const saveUser = async(user) => {
         process.env.TOKEN_KEY,
         {expiresIn: "7d"}
     );
+    try{
     const _verif = await Verification.create({email:user.email, verificationToken:verificationToken});
-
     mailService.sendMail(_user.email, verificationToken,'verify');
+    }catch(e){
+        throw(e)
+    }
 }
 
 const register = async (req,res)=>{
@@ -70,10 +73,10 @@ const register = async (req,res)=>{
         console.log(data);
         if(data && data.message) 
             console.log('res',data);
-            res.render('pages/login',{ message:`A mail was sent to ${_verif.email}, check your inbox`});
+            res.render('pages/login',{ message:`A mail was sent to ${user.email}, check your inbox`});
     }).catch((e)=>{
         console.log(e);
-        res.render('pages/register',{message:e.message});
+        res.render('pages/register',{message:'Registration failed'/*e.message*/});
         // console.log(e);
     });
     // if(result.error){

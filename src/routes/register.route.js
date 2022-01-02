@@ -11,7 +11,7 @@ route.get('/user/register',async (req,res)=>{
 
 route.get('/user/verify/:id',registerService.verifyEmail);
 
-route.post('/user/register',[checking.duplicateEmail],registerService.register);
+route.post('/user/register',[checking.requiredFields, checking.duplicateEmail],registerService.register);
 
 route.get('/user/reset-request',(req,res)=>{
     res.render('pages/reset-request.hbs')

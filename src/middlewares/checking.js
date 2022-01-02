@@ -5,18 +5,20 @@ const jwt = require("jsonwebtoken");
 duplicateEmail = (req, res, next) => {
   User.findOne({
     email: req.body.email,
-  }).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
+  }).then((user) => {
+    
 
     if (user) {
-      res.status(400).send({ message: "Failed! Email is already in use!" });
+      res.render('pages/register',{ message: "Registration failed! Email is already in use!" });
       return;
     }
 
     next();
+  }).catch((e)=>{
+    
+    res.render('pages/register',{ message: "An error occured while performing registration" });
+    return;
+    
   });
 };
 
@@ -33,7 +35,6 @@ existingEmail = (req, res, next) => {
       res.status(400).send({ message: "Failed! User does not exist!" });
       return;
     }
-
     next();
   });
 };
@@ -95,11 +96,28 @@ verifyResetToken = async (req, res, next) => {
     next();
   };
 
+  isAdmin = (req, res, next) => {
+    
+  }
+const requiredFields = (req, res ,next) => {
+  let data = req.body;
+  if(!isEmpty(data.firstname) && !isEmpty(data.lastname) && !isEmpty(data.email) && !isEmpty(data.password) && !isEmpty(data.password2))
+  {
+    return next();
+  }
+  res.render('pages/register',{message:'Firstname, Lastname, Email and Password are required'})
+}
+
+const isEmpty = (str) => {
+  return !str || str === '';
+}
 
 module.exports = {
   checkPasswordLength,
   existingEmail,
   duplicateEmail,
   // verifyToken,
-  verifyResetToken
+  verifyResetToken,
+  isAdmin,
+  requiredFields
 };
