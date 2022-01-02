@@ -1,6 +1,7 @@
 const User=require('../model/user.model');
 const Reset=require('../model/reset.model');
 const jwt = require("jsonwebtoken");
+const common = require("../services/common.service");
 
 duplicateEmail = (req, res, next) => {
   User.findOne({
@@ -96,8 +97,15 @@ verifyResetToken = async (req, res, next) => {
     next();
   };
 
-  isAdmin = (req, res, next) => {
-    
+  const isAdmin = async(req, res, next) => {
+    console.log('isadmin');
+    const user = await common.getUserByToken(req.headers.cookie);
+    if(!user || user.role !== 'ADMIN') 
+    {
+      res.render('main',{message: 'Admin page is only accessible for admin users'});
+      return;
+    }
+      next();
   }
 const requiredFields = (req, res ,next) => {
   let data = req.body;

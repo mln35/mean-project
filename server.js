@@ -5,6 +5,8 @@ const mainRouter = require('./src/routes/main.route');
 const registerRouter = require('./src/routes/register.route');
 const loginRouter=require('./src/routes/login.route');
 const profileRouter=require('./src/routes/profile.route');
+const adminRouter=require('./src/routes/admin.route');
+
 const handlebars = require('express-handlebars');
 
 const path = require('path');
@@ -53,6 +55,7 @@ app.use('/',registerRouter);
 app.use('/', loginRouter);
 app.use('/',mainRouter);
 app.use('/', profileRouter);
+app.use('/', adminRouter)
 // app.locals.current="111111111111111";
 
 app.get('/',(req,res)=>{

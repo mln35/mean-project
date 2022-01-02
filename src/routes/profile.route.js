@@ -1,12 +1,5 @@
 const express = require("express");
 const route = express.Router();
-const User = require("../model/user.model");
-const Verification = require("../model/verification.model");
-const jwt = require("jsonwebtoken");
-const manageProfile = require("../services/profile.manage");
-const common = require('../services/common.service');
-const mailService = require("../services/email.service");
-const registerService = require("../services/register.service");
 const profileService = require('../services/profile.service')
 let key = process.env.TOKEN_KEY;
 
@@ -54,20 +47,7 @@ let key = process.env.TOKEN_KEY;
 
 route.post('/user/profile/update', profileService.update);
 
-route.get('/user/profile', async (req, res)=>{
-    common.getUserByToken(req.headers.cookie).then((user)=>{
-        res.render('pages/profile', {
-            prof:{
-                firstname:user.firstname,
-                lastname:user.lastname,
-                email:user.email,
-                phone:user.phone,
-            }});
-    }).catch((e)=>{
-        res.json({message:"ERROR"});
-        console.log(e);
-    })
-});
+route.get('/user/profile', profileService.goToProfile);
 
 route.get("/user/profile/update/newEmail", (req, res) => {
   res.render("pages");

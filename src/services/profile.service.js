@@ -3,7 +3,7 @@ const Verification = require("../model/verification.model");
 const jwt = require("jsonwebtoken");
 const mailService = require("../services/email.service");
 const registerService = require("../services/register.service");
-const common = require('../services/common.service');
+const common = require("../services/common.service");
 let key = process.env.TOKEN_KEY;
 
 const update = async (req, res) => {
@@ -56,7 +56,24 @@ const update = async (req, res) => {
     res.render("pages/profile", { message: `Email address is required` });
   }
 };
+const goToProfile = async (req, res) => {
+  let user = await common.getUserByToken(req.headers.cookie);
+  if (user) {
+      console.log(user);
+    res.render("pages/profile", {
+      prof: {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        phone: user.phone,
+      },
+    });
+  } else {
+    res.render("pages/main", { message: "Error" });
+  }
+};
 
 module.exports = {
-    update
-}
+  update,
+  goToProfile,
+};

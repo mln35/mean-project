@@ -24,13 +24,13 @@ const redirect = async(req, res) => {
     }
 }
 
-const saveNewPassword = (req, res) => {
+const saveNewPassword = async(req, res) => {
     pass = req.body.password;
     pass = bcrypt.hashSync(pass, 8);
 
-    User.findOneAndUpdate({email:req.email},{$set:{password:pass}}).then((user) => {
+    User.findOneAndUpdate({email:req.email},{$set:{password:pass}}).then(async (user) => {
         if(user){
-            Reset.findOneAndRemove({resetToken:req.token});
+            await Reset.findOneAndRemove({resetToken:req.token});
             res.render('pages/login',{resetMessage:'Password successfully reset'});
         }
     })
