@@ -15,24 +15,31 @@
     - logout
     - resetpassword
     - showProfile
+    - updateProfile
 
 ### Model
 
-- User (firstname, lastname, email, telephone, role, password, image) [role:['ADMIN','USER']]
+- User (firstname, lastname, email, phone, password, role, image, verified, date) [role:['ADMIN','USER']]
+
+-Verification(email, verificationToken)
+
+-Reset(email, resetToken)
 
 ## Routes
+- GET '/user/login' => loginService.goToLogin
+- GET 'user.logout' => render('main')
+- GET '/' => render('main')
+- GET '/user/profile' => render('pages/profile')
+- GET '/user/register' => render('pages.register') 
+- GET /user/verify/:id' => registerService.verifyEmail
+- GET '/user/reset-request' => render('pages/reset-request')
+- GET '/user/reset/:token' => resetService.redirect
 
-    - GET '/home' => render(home,{user:User})
-    - GET '/profile' => render('profile',user)
-    - GET '/user/login' => render('login')
-    - GET '/user/logout' => userService.logout()
-    - GET '/user/register' => render('register')
-    [- GET '/user/resetpassword' => render('resetpassword')]
-    - POST '/user/register' => userServive.register(user)  
-            [note:userService=require(./services/user.service')]
-    - POST '/user/login'  => userServive.login(user)
-    - POST '/user/resetpassword' => userServive.resetpassword(data) 
-    
+- POST '/user/login' => render('pages/login')
+- POST '/user/profile/update' => profileService.update
+- POST '/user/register' => [checking.requiredFields, checking.duplicateEmail],registerService.register
+- POST '/user/reset-request' => registerService.reset
+- POST '/user/reset' => [checking.verifyResetToken],resetService.saveNewPassword
 
 ## Notes
 
