@@ -26,6 +26,7 @@
 -Reset(email, resetToken)
 
 ## Routes
+
 - GET '/user/login' => loginService.goToLogin
 - GET 'user.logout' => render('main')
 - GET '/' => render('main')
@@ -34,6 +35,7 @@
 - GET /user/verify/:id' => registerService.verifyEmail
 - GET '/user/reset-request' => render('pages/reset-request')
 - GET '/user/reset/:token' => resetService.redirect
+- GET 'user/admin' => adminService.admin
 
 - POST '/user/login' => render('pages/login')
 - POST '/user/profile/update' => profileService.update
@@ -43,12 +45,13 @@
 
 ## Notes
 
-- These are infos related to the user management. We will add later other use cases
+.env required variables
 
-
-
-
-TODO
-- login button
-- profil photo
-    - logout
+        MONGO_URL
+        HOST        
+        PORT
+        TOKEN_KEY
+        
+        #SMTP PARAMS
+        EMAIL_USERNAME
+        EMAIL_PASSWORD

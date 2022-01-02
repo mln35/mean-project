@@ -13,14 +13,6 @@ const path = require('path');
 const port = process.env.PORT || 8080;
 const host = process.env.HOST || '127.0.0.1';
 const mongoUrl=process.env.MONGO_URL;
-// try {
-//     mongoose.connect(mongoUrl,()=>{
-//         console.log('Successfully connected to mongodb instance');
-//     });
-    
-// } catch (error) {
-//     console.log('Unable to connect to mongodb instance', error);
-// }
 
 (async () => {
     try{    
@@ -56,7 +48,6 @@ app.use('/', loginRouter);
 app.use('/',mainRouter);
 app.use('/', profileRouter);
 app.use('/', adminRouter)
-// app.locals.current="111111111111111";
 
 app.get('/',(req,res)=>{
    res.json({message:'404 Not found'});

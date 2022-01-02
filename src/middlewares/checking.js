@@ -3,7 +3,7 @@ const Reset=require('../model/reset.model');
 const jwt = require("jsonwebtoken");
 const common = require("../services/common.service");
 
-duplicateEmail = (req, res, next) => {
+const duplicateEmail = (req, res, next) => {
   User.findOne({
     email: req.body.email,
   }).then((user) => {
@@ -23,7 +23,7 @@ duplicateEmail = (req, res, next) => {
   });
 };
 
-existingEmail = (req, res, next) => {
+const existingEmail = (req, res, next) => {
   User.findOne({
     email: req.body.email,
   }).exec((err, user) => {
@@ -40,7 +40,7 @@ existingEmail = (req, res, next) => {
   });
 };
 
-checkPasswordLength = (req, res, next) => {
+const checkPasswordLength = (req, res, next) => {
   if (req.body.password.length < 6) {
     res
       .status(400)
@@ -50,27 +50,8 @@ checkPasswordLength = (req, res, next) => {
   next();
 };
 
-// verifyToken = (req, res, next) => {
-//   module.exports.checkConnection = (req, res, next) => {
-//     const tokenCookie = req.headers.cookie;
-//     if (!tokenCookie) {
-//       res.status(400).send({ message: "No token provided!" });
-//       return;
-//     }
-//     const token = tokenCookie
-//       .split(";")
-//       .filter((t) => t.includes("token"))[0]
-//       .split("=")[1];
-//     console.log(token);
-//     if (!token) {
-//       res.status(400).send({ message: "No token provided!" });
-//       return;
-//     }
-//     next();
-//   };
-// };
 
-verifyResetToken = async (req, res, next) => {
+const verifyResetToken = async (req, res, next) => {
   // module.exports.checkConnection = async (req, res, next) => {
     const tokenCookie = req.headers.cookie;
     if (!tokenCookie) {
@@ -98,7 +79,6 @@ verifyResetToken = async (req, res, next) => {
   };
 
   const isAdmin = async(req, res, next) => {
-    console.log('isadmin');
     const user = await common.getUserByToken(req.headers.cookie);
     if(!user || user.role !== 'ADMIN') 
     {

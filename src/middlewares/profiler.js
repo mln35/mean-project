@@ -3,24 +3,19 @@ const jwt=require('jsonwebtoken');
 let key = process.env.TOKEN_KEY;
 const manageProfile=require('../services/profile.manage');
 
-defEmail = async(req, res, next) => {
+const defEmail = async(req, res, next) => {
     if(req.body.email){
-        console.log(`In middleware verify email:${req.body.email}`);
         next();
     }
     else{
-        console.log("email is not defined");
         res.json({message:"ERROR:the eamil address is not defined"});
     }
     
 }
-emailComparator=async(req, res, next)=>{
+const emailComparator=async(req, res, next)=>{
     try{
         const oldData=await manageProfile.getUserByToken(req.headers.cookie);
         if(oldData.email===req.body.email){
-            // console.log(`in middleware emailComparator---oldData:${oldData}`);
-            console.log(`in middleware emailComparator---newData:${req.body.firstname}`);
-            console.log('equality equality equality');
             const update={
                 firstname:req.body.firstname,
                 lastname:req.body.lastname,
@@ -49,4 +44,7 @@ emailComparator=async(req, res, next)=>{
     
 }
 
-module.exports ={defEmail, emailComparator};
+module.exports = {
+    defEmail, 
+    emailComparator
+};

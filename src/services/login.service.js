@@ -15,15 +15,6 @@ const loginPost = async (_email) => {
     console.log(e);
   }
 };
-const validEmail = async (_email) => {
-  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  if (_email.match(mailformat)) {
-    console.log(`${_email} is valid`);
-  } else {
-    console.log(`${_email} is valid not`);
-  }
-};
-
 const loginForm = async (obj) => {
   try {
     const user = await User.findOne({ email: obj.email });
@@ -68,45 +59,45 @@ const goToLogin = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-      const user = await loginPost(req.body.email);
-      // console.log(user);
-      if (user && user.verified) {
-          const authResult = await bcrypt.compare(req.body.password, user.password);
-          if (authResult) {
-              const token = jwt.sign({ id: user._id }, key, {
-                  expiresIn: "24h",
-              });
-              //    console.log(`in loginForm token:${token}`);
-              res.cookie("token", token);
-              res.locals.logged = true;
-              res.render("main", {
-                  name: user.firstname,
-                  email: user.email,
-              });
-              req.app.locals.current = user;
-          } else {
-              res.render("pages/login", { message: `Login failed` });
-          }
-      }else
-      if (user && !user.verified) {
-          res.render("pages/login", {
-              message: `Your account is waiting for verification`,
-          });
+    const user = await loginPost(req.body.email);
+    // console.log(user);
+    if (user && user.verified) {
+      const authResult = await bcrypt.compare(req.body.password, user.password);
+      if (authResult) {
+        const token = jwt.sign({ id: user._id }, key, {
+          expiresIn: "24h",
+        });
+        //    console.log(`in loginForm token:${token}`);
+        res.cookie("token", token);
+        res.locals.logged = true;
+        res.render("main", {
+          name: user.firstname,
+          email: user.email,
+        });
+        req.app.locals.current = user;
       } else {
-          res.render("pages/login", { message: `Login failed` });
-          //    res.json({message:'Auth Failed'});
+        res.render("pages/login", { message: `Login failed` });
       }
-  } catch (error) {
+    } else if (user && !user.verified) {
+      res.render("pages/login", {
+        message: `Your account is waiting for verification`,
+      });
+    } else {
       res.render("pages/login", { message: `Login failed` });
-      // res.json({ message: error.message });
+      //    res.json({message:'Auth Failed'});
+    }
+  } catch (error) {
+    res.render("pages/login", { message: `Login failed` });
+    // res.json({ message: error.message });
   }
-}
+};
 
 const logout = (req, res) => {
-  res.clearCookie("token");
-  console.log("logout");
-  res.redirect("/");
-};
+    res.locals.logged = false;
+    res.clearCookie("token");
+    res.clearCookie("reset");
+    res.render("main");
+  }
 
 const goToProfile = (req, res) => {
   res.render("pages/profile", { firstname: "Magamou", lastname: "Gueye" });
@@ -114,7 +105,6 @@ const goToProfile = (req, res) => {
 
 module.exports = {
   loginPost,
-  validEmail,
   loginForm,
   login,
   goToLogin,
